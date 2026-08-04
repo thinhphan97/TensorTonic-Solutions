@@ -5,10 +5,9 @@ import triton.language as tl
 
 @triton.jit
 def relu_kernel(x_ptr, out_ptr, n, BLOCK_SIZE: tl.constexpr):
-    # Write code here
+
     pid = tl.program_id(axis=0)
 
-    # 256 index mà program này xử lý
     offsets = pid * BLOCK_SIZE + tl.arange(0, BLOCK_SIZE)
 
     mask = offsets < n
